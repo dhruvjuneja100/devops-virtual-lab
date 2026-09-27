@@ -2,17 +2,17 @@ name: DevOps CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - run: docker build -t devops-lab-app ./app
+      - name: Build Docker image
+        run: docker build -t devops-lab-app ./app
 
-      - run: |
-          kubectl apply -f k8s/deployment.yml
-          kubectl apply -f k8s/service.yml
+      - name: Verify Docker image
+        run: docker images devops-lab-app
