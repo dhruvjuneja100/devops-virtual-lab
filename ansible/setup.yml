@@ -1,0 +1,16 @@
+---
+- name: Configure DevOps Server
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: true
